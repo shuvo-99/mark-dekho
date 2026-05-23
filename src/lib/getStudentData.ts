@@ -1,6 +1,4 @@
 export async function getStudentData(email: string) {
-  console.log("email --", email);
-
   const response = await fetch(process.env.GOOGLE_SCRIPT_URL!, {
     method: "POST",
     headers: {
@@ -15,10 +13,6 @@ export async function getStudentData(email: string) {
   }
 
   console.log("res -- ", response);
-
-  // const text = await response.text();
-
-  // console.log(text);
 
   return response.json();
 }
