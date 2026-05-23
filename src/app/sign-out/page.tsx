@@ -1,4 +1,5 @@
 import { auth, signIn, signOut } from "@/auth";
+import DashboardPage from "../dashboard/page";
 
 type User = {
   name?: string | null | undefined;
@@ -26,6 +27,7 @@ export default async function SignOut({ user }: Props) {
           Sign Out
         </button>
       </form>
+      <DashboardPage email={user.email ?? ""}></DashboardPage>
     </>
   );
 }
