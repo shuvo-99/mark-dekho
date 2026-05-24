@@ -14,9 +14,6 @@ type Props = {
 export default async function SignOut({ user }: Props) {
   return (
     <>
-      <h1 className="text-2xl">
-        Welcome {user.name} email: {user.email}
-      </h1>
       <form
         action={async () => {
           "use server";

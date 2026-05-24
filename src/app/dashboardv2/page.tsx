@@ -1,5 +1,5 @@
 import Footer from "@/components/footer";
-import StudentDashboard from "@/components/studentDashboard";
+import StudentDashboard from "@/components/studentDashboardv2";
 import { getStudentData } from "@/lib/getStudentData";
 import { auth, signIn, signOut } from "@/auth";
 import UnAuthorized from "@/components/unAuthorized";
@@ -31,6 +31,7 @@ export default async function DashboardPage({ email }: Prop) {
           Sign Out
         </button>
       </form>
+      {/* <StudentDashboard></StudentDashboard> */}
       <StudentDashboard></StudentDashboard>
       <Footer />
     </main>
