@@ -1,9 +1,8 @@
 import { auth, signIn, signOut } from "@/auth";
-import SignOut from "../sign-out/page";
-import CardBanner from "@/components/signInCard";
+// import CardBanner from "@/components/signInCard";
 
-import { ArrowUpRight, CirclePlay } from "lucide-react";
-import { Button } from "@/components/ui/button";
+// import { ArrowUpRight, CirclePlay } from "lucide-react";
+// import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -11,7 +10,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { cn } from "@/lib/utils";
+// import { cn } from "@/lib/utils";
 import { GoogleSignInButton } from "@/components/GoogleSignInButton";
 
 export default async function SignIn() {
