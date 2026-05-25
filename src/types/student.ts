@@ -36,6 +36,7 @@ export interface StudentRawData {
 
   total?: number | string;
   grade?: string;
+  gpa?: string;
 
   // allows additional dynamic fields
   [key: string]: unknown;

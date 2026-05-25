@@ -17,6 +17,7 @@ import { GoogleSignInButton } from "@/components/GoogleSignInButton";
 export default async function SignIn() {
   const session = await auth();
   const user = session?.user;
+  console.log("user --", typeof user);
 
   return (
     // user ? (
@@ -28,8 +29,10 @@ export default async function SignIn() {
     >
       <Card className="w-3/4 sm:w-full max-w-2xl bg-muted py-10 text-center dark:border-zinc-600">
         <CardHeader className="px-8">
-          <CardTitle className="mb-2 font-medium text-4xl tracking-tight text-white">
-            Mark Dekho
+          <CardTitle className="mb-2 font-medium text-4xl tracking-tight ">
+            <h1 className="font-bold  text-[#f5a623]">
+              Mark<span style={{ color: "#e8e2d8 " }}> Dekho</span>
+            </h1>
           </CardTitle>
           <CardDescription className="mx-auto max-w-lg text-lg text-white ">
             Welcome students. Find your course marks by signing with your bracu

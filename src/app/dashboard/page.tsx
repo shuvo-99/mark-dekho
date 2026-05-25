@@ -4,7 +4,7 @@ import { getStudentData } from "@/lib/getStudentData";
 import { auth, signIn, signOut } from "@/auth";
 import UnAuthorized from "@/components/unAuthorized";
 import Navbar from "@/components/Navbar";
-import { quizTransformStudentData } from "@/lib/helpers";
+import { redirect } from "next/navigation";
 
 type Prop = {
   email: string;
@@ -17,10 +17,12 @@ export default async function DashboardPage({ email }: Prop) {
 
   const user = session?.user;
   const student = await getStudentData(user?.email ?? "");
-  console.log("std - ", student);
 
-  const newData = quizTransformStudentData(student);
-  console.log("newData - ", newData);
+  if (!student?.email) {
+    redirect("/invalid-email");
+  }
+  // console.log("std - ", student);
+  // console.log("newData - ", newData);
 
   return (
     <main className="min-h-screen bg-[#faf8f4]">

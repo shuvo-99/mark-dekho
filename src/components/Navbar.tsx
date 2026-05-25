@@ -1,5 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { signOut } from "@/auth";
+import { Button } from "./ui/button";
+import { LogOut } from "lucide-react";
 
 export default async function Navbar() {
   //
@@ -12,7 +14,7 @@ export default async function Navbar() {
           className="font-bold text-xl tracking-tight text-gradient"
         > */}
         <h1 className="text-2xl font-bold  text-[#f5a623]">
-          Dash<span style={{ color: "#e8e2d8 " }}>board</span>
+          Mark<span style={{ color: "#e8e2d8 " }}>Dekho</span>
         </h1>
 
         <form
@@ -21,12 +23,16 @@ export default async function Navbar() {
             await signOut({ redirectTo: "/sign-in" });
           }}
         >
-          <button
+          <Button
             type="submit"
-            className="p-2 rounded-xl bg-amber-400 cursor-pointer"
+            className="p-2 rounded-lg border border-[#ffc85c] cursor-pointer"
           >
-            Sign Out
-          </button>
+            {/* <h1 className="text-md font-bold  text-white">
+              Sign<span style={{ color: "#e8e2d8 " }}> Out</span>
+              
+            </h1> */}
+            <LogOut size={20} color="#FFF" />
+          </Button>
         </form>
         {/* </motion.span> */}
       </div>

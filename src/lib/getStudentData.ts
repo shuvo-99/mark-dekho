@@ -12,7 +12,5 @@ export async function getStudentData(email: string) {
     throw new Error("Failed to fetch student data");
   }
 
-  console.log("res -- ", response);
-
   return response.json();
 }

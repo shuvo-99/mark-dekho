@@ -191,7 +191,8 @@ function StudentCard({ student }: Prop) {
           {student.name}
         </h3>
 
-        <div className="flex flex-col gap-2 sm:flex-row sm:justify-between ">
+        {/* <div className="flex flex-col gap-2 sm:flex-row sm:justify-between "> */}
+        <div className="flex flex-col gap-2 ">
           {[
             { label: "Email", value: `${student.email}` },
             { label: "Student ID", value: `${student.student_id}` },
@@ -249,7 +250,7 @@ function StudentCard({ student }: Prop) {
   );
 }
 
-function GradeCard() {
+function GradeCard({ student }: Prop) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 15 }}
@@ -351,7 +352,7 @@ function GradeCard() {
             }}
             className={cn("text-6xl text-[#e8e2d8]")}
           >
-            87
+            {student.total === "" ? "-" : student.total}
           </div>
         </div>
 
@@ -375,7 +376,7 @@ function GradeCard() {
             }}
             className={cn("text-6xl text-[#f5a623]")}
           >
-            A-
+            {student.grade === "" ? "-" : student.grade}
           </div>
 
           <div
@@ -389,7 +390,7 @@ function GradeCard() {
               marginTop: 6,
             }}
           >
-            GPA 3.70
+            GPA {student.gpa === "" ? "-" : student.gpa}
           </div>
         </div>
       </div>
@@ -496,7 +497,7 @@ function ContentSections({ stats }: StatProps) {
                   {section.details?.map((elem, index) => {
                     return (
                       <motion.a
-                        // key={elem.id}
+                        key={index}
                         // href={`#${elem.id}`}
                         initial={{ opacity: 0, y: 15 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -527,7 +528,7 @@ function ContentSections({ stats }: StatProps) {
                                 ...serif,
                               }}
                             >
-                              {elem}
+                              {elem === "" ? "-" : elem}
                             </h3>
 
                             <h3 className="text-md  text-center">
@@ -722,7 +723,7 @@ function Statcard({ stats }: StatProps) {
                         color: colors.navy,
                       }}
                     >
-                      {section.value}
+                      {section.value === "" ? "-" : section.value}
                     </span>
                     <span style={{ fontSize: 14, color: colors.textMuted }}>
                       {section.suffix}
@@ -738,11 +739,8 @@ function Statcard({ stats }: StatProps) {
   );
 }
 
-// export default function StudentDashboard({ studentData }: Props) {
 const StudentDashboard = ({ student }: Prop) => {
   const stats = transformSections(student, colors);
-
-  console.log("formatted --- ", stats);
 
   return (
     // <div className="min-h-screen scroll-smooth ">
@@ -862,7 +860,7 @@ const StudentDashboard = ({ student }: Prop) => {
                 </CardContent>
               </Card>
             </motion.div> */}
-          <GradeCard />
+          <GradeCard student={student} />
         </div>
 
         {/* NAVIGATION CARDS */}
