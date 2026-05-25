@@ -1,6 +1,13 @@
-import Image from "next/image";
+// import { auth } from "@/auth";
+// import Image from "next/image";
+// import { useRouter } from "next/navigation";
 
 export default function Home() {
+  // const session = await auth();
+  // const user = session?.user;
+  // const router = useRouter();
+
+  // user ? router.push("/dashboard") : router.push("/sign-in");
   return (
     <></>
     // <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">

@@ -1,7 +1,7 @@
 "use client";
 
 import { Card, CardContent } from "@/components/ui/card";
-import { cn } from "@/lib/utils";
+import { cn, transformSections } from "@/lib/utils";
 import { motion } from "framer-motion";
 import {
   BookOpen,
@@ -14,11 +14,16 @@ import {
   PenBox,
   UserCheck,
   LaptopMinimal,
+  LucideIcon,
 } from "lucide-react";
 import AvatarDemo from "./avatar";
+import { SectionItem, StudentRawData } from "@/types/student";
 
-type Props = {
-  studentData: any;
+type Prop = {
+  student: StudentRawData;
+};
+type StatProps = {
+  stats: SectionItem[];
 };
 
 // ─── Tiny style helpers ────────────────────────────────────────────────────────
@@ -136,9 +141,7 @@ const sections = [
   // },
 ];
 
-const quizzes = [9, 8, 6, 9];
-
-function Tag({ children, style }) {
+function Tag({ children, style }: any) {
   return (
     <span
       style={{
@@ -157,7 +160,7 @@ function Tag({ children, style }) {
   );
 }
 
-function StudentCard() {
+function StudentCard({ student }: Prop) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 15 }}
@@ -185,13 +188,13 @@ function StudentCard() {
             marginBottom: 12,
           }}
         >
-          John Doe
+          {student.name}
         </h3>
 
         <div className="flex flex-col gap-2 sm:flex-row sm:justify-between ">
           {[
-            { label: "Email", value: "john@gmail.com" },
-            { label: "Student ID", value: "2024-CS-081" },
+            { label: "Email", value: `${student.email}` },
+            { label: "Student ID", value: `${student.student_id}` },
           ].map(({ label, value }) => (
             <div key={label}>
               <div
@@ -237,7 +240,7 @@ function StudentCard() {
                 border: "1px solid rgba(245,166,35,0.3)",
               }}
             >
-              CSE220 — Data Structures
+              {student.course}
             </Tag>
           </div>
         </div>
@@ -394,25 +397,28 @@ function GradeCard() {
   );
 }
 
-function ContentSections() {
+function ContentSections({ stats }: StatProps) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-      {sections.map(({ id, title, icon, color, bg }, i) => {
-        const Icon = icon;
+      {/* {sections.map(({ id, title, icon, color, bg }, i) => { */}
+      {stats.map((section, i) => {
+        const Icon = section.icon;
 
         if (
-          id === "final" ||
-          id === "midterm" ||
-          id === "projects" ||
-          id === "attendance" ||
-          id === "lab"
-        )
+          section.id === "final" ||
+          section.id === "midterm" ||
+          section.id === "project" ||
+          section.id === "attendance" ||
+          section.id === "lab" ||
+          section.value === "null"
+        ) {
           return;
+        }
 
         return (
           <motion.section
-            key={id}
-            id={id}
+            key={section.id}
+            id={section.id}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 + i * 0.08 }}
@@ -440,11 +446,11 @@ function ContentSections() {
                     width: 36,
                     height: 36,
                     borderRadius: 10,
-                    background: bg,
+                    background: section.bg,
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    color,
+                    color: section.color,
                   }}
                 >
                   <Icon size={18} />
@@ -456,12 +462,12 @@ function ContentSections() {
                     letterSpacing: "-0.2px",
                   }}
                 >
-                  {title}
+                  {section.title}
                 </h3>
                 {/* <Tag style={{ marginLeft: "auto", ...tagStyle }}>{tag}</Tag> */}
               </div>
               <div style={{ padding: "20px 24px" }}>
-                <div
+                {/* <div
                   style={{
                     background: "#faf8f4",
                     borderRadius: 10,
@@ -474,7 +480,119 @@ function ContentSections() {
                     fontSize: 13,
                   }}
                 >
-                  {title} content goes here
+                  {section.title} content goes here
+                </div> */}
+
+                <div
+                  className="
+                grid
+                grid-cols-1
+                sm:grid-cols-2
+                lg:grid-cols-3
+                xl:grid-cols-4
+                gap-6
+              "
+                >
+                  {section.details?.map((elem, index) => {
+                    return (
+                      <motion.a
+                        // key={elem.id}
+                        // href={`#${elem.id}`}
+                        initial={{ opacity: 0, y: 15 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: index * 0.05 }}
+                        // whileHover={{ scale: 1.03 }}
+                        whileTap={{ scale: 0.98 }}
+                      >
+                        <Card
+                          className={cn(
+                            "rounded-2xl",
+                            "bg-[#faf8f4]",
+                            "border border-[rgba(13,27,42,0.1)]",
+                            "transition-all duration-300",
+                            "h-full",
+                          )}
+                        >
+                          <CardContent
+                            className={cn(
+                              "flex flex-col",
+                              "items-center",
+                              "justify-center",
+                              "space-y-2",
+                            )}
+                          >
+                            <h3
+                              className="text-3xl"
+                              style={{
+                                ...serif,
+                              }}
+                            >
+                              {elem}
+                            </h3>
+
+                            <h3 className="text-md  text-center">
+                              {section.title + " " + (index + 1)}
+                            </h3>
+                          </CardContent>
+                          {/* <CardContent
+                            className={cn(
+                              "px-6",
+                              "flex",
+                              // " flex-col",
+                              "items-center",
+                              "justify-between",
+                              // "gap-4",
+                            )}
+                          >
+                            <div className="space-y-2">
+                              <div
+                                className={cn(
+                                  "h-12 w-12",
+                                  "rounded-lg",
+                                  "flex items-center justify-center",
+                                )}
+                                style={{
+                                  backgroundColor: section.bg,
+                                }}
+                              >
+                                <Icon size={30} color={section.color} />
+                              </div>
+
+                              <p className="text-lg text-[#8a9ab0]">
+                                {section.title}
+                              </p>
+                            </div>
+
+                            <div
+                              style={{
+                                display: "flex",
+                                alignItems: "baseline",
+                                gap: 2,
+                              }}
+                            >
+                              <span
+                                style={{
+                                  fontSize: 28,
+                                  fontWeight: 300,
+                                  color: colors.navy,
+                                }}
+                              >
+                                {section.value}
+                              </span>
+                              <span
+                                style={{
+                                  fontSize: 14,
+                                  color: colors.textMuted,
+                                }}
+                              >
+                                {section.suffix}
+                              </span>
+                            </div>
+                          </CardContent> */}
+                        </Card>
+                      </motion.a>
+                    );
+                  })}
                 </div>
               </div>
             </div>
@@ -485,7 +603,7 @@ function ContentSections() {
   );
 }
 
-function Statcard() {
+function Statcard({ stats }: StatProps) {
   return (
     <div>
       <motion.span
@@ -508,8 +626,9 @@ function Statcard() {
                 gap-6
               "
       >
-        {sections.map((section, index) => {
-          const Icon = section.icon;
+        {stats.map((section, index) => {
+          if (section.value === "null") return;
+          const Icon: LucideIcon = section.icon;
 
           return (
             <motion.a
@@ -575,7 +694,7 @@ function Statcard() {
                   <div className="space-y-2">
                     <div
                       className={cn(
-                        "h-12 w-12",
+                        "h-8 w-8",
                         "rounded-lg",
                         "flex items-center justify-center",
                       )}
@@ -583,9 +702,10 @@ function Statcard() {
                         backgroundColor: section.bg,
                       }}
                     >
-                      <Icon size={30} color={section.color} />
+                      <Icon size={20} color={section.color} />
                     </div>
-                    <p className="text-lg text-[#8a9ab0]">{section.title}</p>
+
+                    <p className="text-md text-[#8a9ab0]">{section.title}</p>
                   </div>
 
                   <div
@@ -617,8 +737,13 @@ function Statcard() {
     </div>
   );
 }
+
 // export default function StudentDashboard({ studentData }: Props) {
-const StudentDashboard = () => {
+const StudentDashboard = ({ student }: Prop) => {
+  const stats = transformSections(student, colors);
+
+  console.log("formatted --- ", stats);
+
   return (
     // <div className="min-h-screen scroll-smooth ">
     // <section className="relative overflow-hidden pt-32 pb-24 lg:pt-48 lg:pb-32">
@@ -711,7 +836,7 @@ const StudentDashboard = () => {
                 </CardContent>
               </Card>
             </motion.div> */}
-          <StudentCard />
+          <StudentCard student={student} />
 
           {/* GRADE CARD */}
           {/* <motion.div
@@ -741,7 +866,7 @@ const StudentDashboard = () => {
         </div>
 
         {/* NAVIGATION CARDS */}
-        <Statcard />
+        <Statcard stats={stats} />
         {/* CONTENT SECTIONS */}
         {/* <div className="space-y-10">
             {sections.map((section) => {
@@ -783,7 +908,7 @@ const StudentDashboard = () => {
               );
             })}
           </div> */}
-        <ContentSections />
+        <ContentSections stats={stats} />
       </main>
       {/* </div> */}
       {/* </div> */}
