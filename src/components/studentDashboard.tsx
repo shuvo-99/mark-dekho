@@ -13,6 +13,7 @@ import {
   MessageSquare,
   PenBox,
   UserCheck,
+  LaptopMinimal,
 } from "lucide-react";
 import AvatarDemo from "./avatar";
 
@@ -50,6 +51,8 @@ const sections = [
     color: colors.coral,
     // bg: "#ff6b5b",
     bg: "rgba(255,107,91,0.10)",
+    suffix: "%",
+    value: "92",
   },
   {
     id: "assignments",
@@ -58,6 +61,8 @@ const sections = [
     color: colors.amber,
     // bg: "#f5a623",
     bg: "rgba(245,166,35,0.10)",
+    suffix: "/5",
+    value: "92",
   },
   {
     id: "quiz",
@@ -66,6 +71,8 @@ const sections = [
     color: colors.purple,
     // bg: "#7b87f5",
     bg: "rgba(123,135,245,0.10)",
+    suffix: "%",
+    value: "92",
   },
   {
     id: "midterm",
@@ -74,6 +81,8 @@ const sections = [
     color: colors.green,
     // bg: "#2dd4a0",
     bg: "rgba(45,212,160,0.10)",
+    suffix: "%",
+    value: "92",
   },
   {
     id: "projects",
@@ -82,6 +91,8 @@ const sections = [
     color: colors.coral,
     // bg: "#ff6b5b",
     bg: "rgba(255,107,91,0.10)",
+    suffix: "%",
+    value: "92",
   },
   {
     id: "evaluation",
@@ -90,14 +101,28 @@ const sections = [
     color: colors.amber,
     // bg: "#f5a623",
     bg: "rgba(245,166,35,0.10)",
+    suffix: "%",
+    value: "92",
+  },
+  {
+    id: "lab",
+    title: "Lab",
+    icon: LaptopMinimal,
+    color: colors.purple,
+    // bg: "#7b87f5",
+    bg: "rgba(123,135,245,0.10)",
+    suffix: "%",
+    value: "92",
   },
   {
     id: "final",
     title: "Final",
     icon: GraduationCap,
-    color: colors.purple,
-    // bg: "#7b87f5",
-    bg: "rgba(123,135,245,0.10)",
+    color: colors.green,
+    // bg: "#2dd4a0",
+    bg: "rgba(45,212,160,0.10)",
+    suffix: "%",
+    value: "92",
   },
   // {
   //   id: "announcements",
@@ -379,7 +404,8 @@ function ContentSections() {
           id === "final" ||
           id === "midterm" ||
           id === "projects" ||
-          id === "attendance"
+          id === "attendance" ||
+          id === "lab"
         )
           return;
 
@@ -459,13 +485,148 @@ function ContentSections() {
   );
 }
 
+function Statcard() {
+  return (
+    <div>
+      <motion.span
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        className="font-bold text-xl tracking-tight text-gradient"
+      >
+        <h2 className="text-2xl font-medium mb-6" style={{ ...serif }}>
+          Performance Overview
+        </h2>
+      </motion.span>
+
+      <div
+        className="
+                grid
+                grid-cols-1
+                sm:grid-cols-2
+                lg:grid-cols-3
+                xl:grid-cols-4
+                gap-6
+              "
+      >
+        {sections.map((section, index) => {
+          const Icon = section.icon;
+
+          return (
+            <motion.a
+              key={section.id}
+              href={`#${section.id}`}
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.05 }}
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <Card
+                className={cn(
+                  "rounded-2xl",
+                  "border border-[rgba(13,27,42,0.1)] hover:border-[#f5a623]",
+                  // "shadow-sm",
+                  "hover:shadow-sm",
+                  "transition-all duration-300",
+                  "cursor-pointer",
+                  "h-full",
+                  "bg-white",
+                )}
+              >
+                {/* <CardContent
+                        className="
+                          p-2
+                          flex flex-col
+                          items-center
+                          justify-center
+                          gap-4
+                          
+                        "
+                      >
+                        <div
+                          className={cn(
+                            "h-12 w-12",
+                            "rounded-lg",
+                            "flex items-center justify-center",
+                          )}
+                          style={{
+                            backgroundColor: section.bg,
+                          }}
+                        >
+                          <Icon size={30} color={section.color} />
+                        </div>
+
+                        <h3
+                          className="text-lg  text-center"
+                        >
+                          {section.title}
+                        </h3>
+                      </CardContent> */}
+                <CardContent
+                  className={cn(
+                    "px-6",
+                    "flex",
+                    // " flex-col",
+                    "items-center",
+                    "justify-between",
+                    // "gap-4",
+                  )}
+                >
+                  <div className="space-y-2">
+                    <div
+                      className={cn(
+                        "h-12 w-12",
+                        "rounded-lg",
+                        "flex items-center justify-center",
+                      )}
+                      style={{
+                        backgroundColor: section.bg,
+                      }}
+                    >
+                      <Icon size={30} color={section.color} />
+                    </div>
+                    <p className="text-lg text-[#8a9ab0]">{section.title}</p>
+                  </div>
+
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "baseline",
+                      gap: 2,
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontSize: 28,
+                        fontWeight: 300,
+                        color: colors.navy,
+                      }}
+                    >
+                      {section.value}
+                    </span>
+                    <span style={{ fontSize: 14, color: colors.textMuted }}>
+                      {section.suffix}
+                    </span>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.a>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
 // export default function StudentDashboard({ studentData }: Props) {
 const StudentDashboard = () => {
   return (
-    <div className="min-h-screen scroll-smooth ">
-      <div className="flex">
-        {/* SIDEBAR */}
-        <aside
+    // <div className="min-h-screen scroll-smooth ">
+    // <section className="relative overflow-hidden pt-32 pb-24 lg:pt-48 lg:pb-32">
+    <section className="relative overflow-hidden pt-20">
+      {/* <div className="flex"> */}
+
+      {/* SIDEBAR */}
+      {/* <aside
           className="
             hidden lg:flex
             sticky top-0
@@ -514,14 +675,15 @@ const StudentDashboard = () => {
               </a>
             );
           })}
-        </aside>
+        </aside> */}
 
-        {/* MAIN CONTENT */}
-        <main className="flex-1 p-4 md:p-8 space-y-10 bg-[#faf8f4]">
-          {/* TOP SECTION */}
-          <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
-            {/* STUDENT INFO */}
-            {/* <motion.div
+      {/* MAIN CONTENT */}
+      {/* <main className="flex-1 p-4 md:p-8 space-y-10 bg-[#faf8f4]"> */}
+      <main className="max-w-5xl mx-auto p-4 md:p-8 space-y-10 ">
+        {/* TOP SECTION */}
+        <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
+          {/* STUDENT INFO */}
+          {/* <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               className="xl:col-span-2"
@@ -549,10 +711,10 @@ const StudentDashboard = () => {
                 </CardContent>
               </Card>
             </motion.div> */}
-            <StudentCard />
+          <StudentCard />
 
-            {/* GRADE CARD */}
-            {/* <motion.div
+          {/* GRADE CARD */}
+          {/* <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
@@ -575,90 +737,13 @@ const StudentDashboard = () => {
                 </CardContent>
               </Card>
             </motion.div> */}
-            <GradeCard />
-          </div>
+          <GradeCard />
+        </div>
 
-          {/* NAVIGATION CARDS */}
-          <div>
-            <h2 className="text-2xl font-bold mb-6">Course Sections</h2>
-
-            <div
-              className="
-                grid
-                grid-cols-1
-                sm:grid-cols-2
-                lg:grid-cols-3
-                xl:grid-cols-4
-                gap-6
-              "
-            >
-              {sections.map((section, index) => {
-                const Icon = section.icon;
-
-                return (
-                  <motion.a
-                    key={section.id}
-                    href={`#${section.id}`}
-                    initial={{ opacity: 0, y: 15 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.05 }}
-                    whileHover={{ scale: 1.03 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <Card
-                      className="
-                        rounded-3xl
-                        border border-[#0d1b2a1a] hover:border-[#f5a623]
-                        shadow-sm
-                        hover:shadow-xl
-                        transition-all
-                        duration-300
-                        cursor-pointer
-                        h-full
-                        bg-white
-                      "
-                    >
-                      <CardContent
-                        className="
-                          p-2
-                          flex flex-col
-                          items-center
-                          justify-center
-                          gap-4
-                          
-                        "
-                      >
-                        <div
-                          className={cn(
-                            "h-12 w-12",
-                            "rounded-lg",
-                            "flex items-center justify-center",
-                          )}
-                          style={{
-                            backgroundColor: section.bg,
-                          }}
-                        >
-                          <Icon size={30} color={section.color} />
-                        </div>
-
-                        <h3
-                          className="text-lg  text-center"
-                          // style={{
-                          //   ...serif,
-                          // }}
-                        >
-                          {section.title}
-                        </h3>
-                      </CardContent>
-                    </Card>
-                  </motion.a>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* CONTENT SECTIONS */}
-          {/* <div className="space-y-10">
+        {/* NAVIGATION CARDS */}
+        <Statcard />
+        {/* CONTENT SECTIONS */}
+        {/* <div className="space-y-10">
             {sections.map((section) => {
               const Icon = section.icon;
 
@@ -698,10 +783,11 @@ const StudentDashboard = () => {
               );
             })}
           </div> */}
-          <ContentSections />
-        </main>
-      </div>
-    </div>
+        <ContentSections />
+      </main>
+      {/* </div> */}
+      {/* </div> */}
+    </section>
   );
 };
 

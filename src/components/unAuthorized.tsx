@@ -24,7 +24,7 @@ const UnAuthorized = () => {
             401 Unauthorized
           </CardTitle>
           <CardDescription className="mx-auto max-w-lg text-lg text-muted-foreground text-white">
-            Need to Sign In to access the contents
+            Need to Sign In to see the marks
           </CardDescription>
         </CardHeader>
         <CardContent className="mx-auto mt-4 px-8">
