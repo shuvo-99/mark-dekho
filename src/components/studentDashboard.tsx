@@ -520,10 +520,11 @@ function ContentSections({ stats }: StatProps) {
                               "items-center",
                               "justify-center",
                               "space-y-2",
+                              "text-[#171717]",
                             )}
                           >
                             <h3
-                              className="text-3xl"
+                              className="text-3xl "
                               style={{
                                 ...serif,
                               }}
