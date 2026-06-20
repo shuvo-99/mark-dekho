@@ -12,40 +12,44 @@ export interface StudentRawData {
 
   attendance?: number | string;
 
-  quiz1?: number | string;
-  quiz2?: number | string;
-  quiz3?: number | string;
-  quiz4?: number | string;
+  // quiz1?: number | string;
+  // quiz2?: number | string;
+  // quiz3?: number | string;
+  // quiz4?: number | string;
 
-  totalQuiz?: number | string;
+  // totalQuiz?: number | string;
 
-  assignment1?: number | string;
-  assignment2?: number | string;
+  // assignment1?: number | string;
+  // assignment2?: number | string;
 
-  totalAssignment?: number | string;
+  // totalAssignment?: number | string;
 
-  eval1?: number | string;
-  eval2?: number | string;
+  // eval1?: number | string;
+  // eval2?: number | string;
 
-  totalEval?: number | string;
-  lab?: number | string;
+  // totalEval?: number | string;
+  // lab?: number | string;
 
-  mid?: number | string;
-  project?: number | string;
-  final?: number | string;
+  // mid?: number | string;
+  // project?: number | string;
+  // final?: number | string;
 
-  total?: number | string;
+  total_100?: number | string;
   grade?: string;
-  gpa?: string;
+  gpa_4?: string;
 
   // allows additional dynamic fields
-  [key: string]: unknown;
+  [key: string]: string | number | unknown;
 }
 
 // ======================
 // SECTION TYPE
 // ======================
 
+export interface DetailItem {
+  value: string;
+  suffix: string;
+}
 export interface SectionItem {
   id: string;
   title: string;
@@ -60,7 +64,7 @@ export interface SectionItem {
   value: string;
 
   // details?: (number | string)[];
-  details?: string[];
+  details?: DetailItem[];
 }
 
 // ======================
