@@ -352,7 +352,7 @@ function GradeCard({ student }: Prop) {
             }}
             className={cn("text-6xl text-[#e8e2d8]")}
           >
-            {student.total === "" ? "-" : student.total}
+            {student.total_100 === "" ? "-" : student.total_100}
           </div>
         </div>
 
@@ -390,7 +390,7 @@ function GradeCard({ student }: Prop) {
               marginTop: 6,
             }}
           >
-            GPA {student.gpa === "" ? "-" : student.gpa}
+            GPA {student.gpa_4 === "" ? "-" : student.gpa_4}
           </div>
         </div>
       </div>
@@ -413,7 +413,7 @@ function ContentSections({ stats }: StatProps) {
           section.id === "lab" ||
           section.value === "null"
         ) {
-          return;
+          return null;
         }
 
         return (
@@ -523,14 +523,39 @@ function ContentSections({ stats }: StatProps) {
                               "text-[#171717]",
                             )}
                           >
-                            <h3
+                            {/* <h3
                               className="text-3xl "
                               style={{
                                 ...serif,
                               }}
                             >
-                              {elem === "" ? "-" : elem}
-                            </h3>
+                              {elem.value === "" ? "-" : elem.value}
+                            </h3> */}
+                            <div
+                              style={{
+                                display: "flex",
+                                alignItems: "baseline",
+                                gap: 2,
+                              }}
+                            >
+                              <h3
+                                className="text-3xl"
+                                style={{
+                                  ...serif,
+                                }}
+                              >
+                                {elem.value === "" ? "-" : elem.value}
+                              </h3>
+
+                              <span
+                                style={{
+                                  fontSize: 14,
+                                  color: colors.textMuted,
+                                }}
+                              >
+                                {elem.suffix}
+                              </span>
+                            </div>
 
                             <h3 className="text-md  text-center">
                               {section.title + " " + (index + 1)}
@@ -613,7 +638,10 @@ function Statcard({ stats }: StatProps) {
         animate={{ opacity: 1, x: 0 }}
         className="font-bold text-xl tracking-tight text-gradient"
       >
-        <h2 className="text-2xl font-medium mb-6" style={{ ...serif }}>
+        <h2
+          className="text-2xl font-medium mb-6 text-[#171717]"
+          style={{ ...serif }}
+        >
           Performance Overview
         </h2>
       </motion.span>
@@ -629,7 +657,7 @@ function Statcard({ stats }: StatProps) {
               "
       >
         {stats.map((section, index) => {
-          if (section.value === "null") return;
+          if (section.value === "null") return null;
           const Icon: LucideIcon = section.icon;
 
           return (
