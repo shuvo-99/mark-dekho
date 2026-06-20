@@ -613,7 +613,10 @@ function Statcard({ stats }: StatProps) {
         animate={{ opacity: 1, x: 0 }}
         className="font-bold text-xl tracking-tight text-gradient"
       >
-        <h2 className="text-2xl font-medium mb-6" style={{ ...serif }}>
+        <h2
+          className="text-2xl font-medium mb-6 text-[#171717]"
+          style={{ ...serif }}
+        >
           Performance Overview
         </h2>
       </motion.span>
