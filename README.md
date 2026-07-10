@@ -1,36 +1,149 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎓 Mark Dekho
 
-## Getting Started
+A modern, responsive student performance dashboard built with **Next.js 16** that transforms raw assessment data into a clean, interactive, and easy-to-understand academic report.
 
-First, run the development server:
+Designed for educational institutions, instructors, and training organizations, Mark Dekho provides students with a centralized view of their academic progress, including attendance, quizzes, assignments, assessments, projects, labs, and examination results.
+
+## ✨ Overview
+
+Traditional spreadsheets are difficult for students to navigate and even harder for instructors to maintain across multiple courses. Mark Dekho solves this by converting structured academic data into a modern web application that is responsive, visually appealing, and scalable.
+
+The application is designed to support different course structures dynamically. Whether a course contains quizzes, assessments, evaluations, projects, or any combination of grading components, the dashboard automatically adapts without requiring UI changes.
+
+---
+
+## 🚀 Features
+
+* 📊 Interactive student performance dashboard
+* 👤 Individual student profile and academic overview
+* 📈 Dynamic performance cards
+* 📚 Detailed breakdown of quizzes, assignments, assessments, and evaluations
+* 🎯 Automatic adaptation to different course marking schemes
+* 📱 Fully responsive design for desktop, tablet, and mobile
+* ✨ Smooth UI animations using Framer Motion
+* 🎨 Modern and clean interface built with Tailwind CSS & shadcn/ui
+* 🔐 Authentication support using NextAuth
+* ☁️ Optimized for deployment on Vercel
+
+---
+
+## 🛠 Tech Stack
+
+### Frontend
+
+* Next.js 16 (App Router)
+* React 19
+* TypeScript
+
+### UI & Styling
+
+* Tailwind CSS v4
+* shadcn/ui
+* Radix UI
+* Framer Motion
+* Lucide React Icons
+* clsx
+* class-variance-authority
+* tailwind-merge
+
+### Authentication
+
+* NextAuth.js
+
+### Deployment
+
+* Vercel
+
+---
+
+## 💡 Highlights
+
+* Dynamic rendering based on available grading components
+* Reusable and modular React components
+* Configuration-driven architecture for easy customization
+* Type-safe development with TypeScript
+* Optimized animations without compromising performance
+* Clean component-based architecture for maintainability
+
+<!-- --- -->
+
+<!-- ## 📷 Screenshots
+
+> Screenshots will be added here. -->
+
+---
+
+## 🎯 Use Cases
+
+This project can be customized for:
+
+* Universities
+* Schools
+* Coaching Centers
+* Online Learning Platforms
+* Training Institutes
+* Bootcamps
+* Corporate Learning Programs
+
+<!-- ---
+
+## 🚀 Getting Started
+
+Clone the repository
+
+```bash
+git clone https://github.com/shuvo-99/mark-dekho.git
+```
+
+Install dependencies
+
+```bash
+npm install
+```
+
+Start the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Build for production
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Run the production build
 
-## Learn More
+```bash
+npm start
+``` -->
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🌟 Why This Project?
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+This project demonstrates my ability to build modern production-ready web applications with a focus on:
 
-## Deploy on Vercel
+* Clean UI/UX
+* Scalable architecture
+* Reusable component design
+* Dynamic data rendering
+* Responsive layouts
+* Type-safe development
+* Performance optimization
+* Maintainable codebase
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 👨‍💻 About the Developer
+
+Developed by **Md. Anonto Shuvo**.
+
+If you're looking for someone to build modern dashboards, educational platforms, admin panels, or data-driven web applications using the latest React ecosystem, feel free to connect.
+
+---
+
+## 📄 License
+
+This project is available under the MIT License.
