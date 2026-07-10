@@ -398,23 +398,250 @@ function GradeCard({ student }: Prop) {
   );
 }
 
+// function ContentSections({ stats }: StatProps) {
+//   return (
+//     <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+//       {/* {sections.map(({ id, title, icon, color, bg }, i) => { */}
+//       {stats.map((section, i) => {
+//         const Icon = section.icon;
+
+//         if (
+//           section.id === "final" ||
+//           section.id === "midterm" ||
+//           section.id === "project" ||
+//           section.id === "attendance" ||
+//           section.id === "lab" ||
+//           section.value === "null"
+//         ) {
+//           return null;
+//         }
+
+//         return (
+//           <motion.section
+//             key={section.id}
+//             id={section.id}
+//             initial={{ opacity: 0, y: 20 }}
+//             animate={{ opacity: 1, y: 0 }}
+//             transition={{ delay: 0.1 + i * 0.08 }}
+//             style={{ scrollMarginTop: 96 }}
+//           >
+//             <div
+//               style={{
+//                 background: "#fff",
+//                 borderRadius: 16,
+//                 border: `1px solid ${colors.borderCream}`,
+//                 overflow: "hidden",
+//               }}
+//             >
+//               <div
+//                 style={{
+//                   padding: "20px 24px",
+//                   display: "flex",
+//                   alignItems: "center",
+//                   gap: 14,
+//                   borderBottom: `1px solid ${colors.borderCream}`,
+//                 }}
+//               >
+//                 <div
+//                   style={{
+//                     width: 36,
+//                     height: 36,
+//                     borderRadius: 10,
+//                     background: section.bg,
+//                     display: "flex",
+//                     alignItems: "center",
+//                     justifyContent: "center",
+//                     color: section.color,
+//                   }}
+//                 >
+//                   <Icon size={18} />
+//                 </div>
+//                 <h3
+//                   style={{
+//                     fontSize: 18,
+//                     color: colors.navy,
+//                     letterSpacing: "-0.2px",
+//                   }}
+//                 >
+//                   {section.title}
+//                 </h3>
+//                 {/* <Tag style={{ marginLeft: "auto", ...tagStyle }}>{tag}</Tag> */}
+//               </div>
+//               <div style={{ padding: "20px 24px" }}>
+//                 {/* <div
+//                   style={{
+//                     background: "#faf8f4",
+//                     borderRadius: 10,
+//                     border: `1px dashed rgba(13,27,42,0.12)`,
+//                     height: 120,
+//                     display: "flex",
+//                     alignItems: "center",
+//                     justifyContent: "center",
+//                     color: colors.textMuted,
+//                     fontSize: 13,
+//                   }}
+//                 >
+//                   {section.title} content goes here
+//                 </div> */}
+
+//                 <div
+//                   className="
+//                 grid
+//                 grid-cols-1
+//                 sm:grid-cols-2
+//                 lg:grid-cols-3
+//                 xl:grid-cols-4
+//                 gap-6
+//               "
+//                 >
+//                   {section.details?.map((elem, index) => {
+//                     return (
+//                       <motion.a
+//                         key={index}
+//                         // href={`#${elem.id}`}
+//                         initial={{ opacity: 0, y: 15 }}
+//                         animate={{ opacity: 1, y: 0 }}
+//                         transition={{ delay: index * 0.05 }}
+//                         // whileHover={{ scale: 1.03 }}
+//                         whileTap={{ scale: 0.98 }}
+//                       >
+//                         <Card
+//                           className={cn(
+//                             "rounded-2xl",
+//                             "bg-[#faf8f4]",
+//                             "border border-[rgba(13,27,42,0.1)]",
+//                             "transition-all duration-300",
+//                             "h-full",
+//                           )}
+//                         >
+//                           <CardContent
+//                             className={cn(
+//                               "flex flex-col",
+//                               "items-center",
+//                               "justify-center",
+//                               "space-y-2",
+//                               "text-[#171717]",
+//                             )}
+//                           >
+//                             {/* <h3
+//                               className="text-3xl "
+//                               style={{
+//                                 ...serif,
+//                               }}
+//                             >
+//                               {elem.value === "" ? "-" : elem.value}
+//                             </h3> */}
+//                             <div
+//                               style={{
+//                                 display: "flex",
+//                                 alignItems: "baseline",
+//                                 gap: 2,
+//                               }}
+//                             >
+//                               <h3
+//                                 className="text-3xl"
+//                                 style={{
+//                                   ...serif,
+//                                 }}
+//                               >
+//                                 {elem.value === "" ? "-" : elem.value}
+//                               </h3>
+
+//                               <span
+//                                 style={{
+//                                   fontSize: 14,
+//                                   color: colors.textMuted,
+//                                 }}
+//                               >
+//                                 {elem.suffix}
+//                               </span>
+//                             </div>
+
+//                             <h3 className="text-md  text-center">
+//                               {section.title + " " + (index + 1)}
+//                             </h3>
+//                           </CardContent>
+//                           {/* <CardContent
+//                             className={cn(
+//                               "px-6",
+//                               "flex",
+//                               // " flex-col",
+//                               "items-center",
+//                               "justify-between",
+//                               // "gap-4",
+//                             )}
+//                           >
+//                             <div className="space-y-2">
+//                               <div
+//                                 className={cn(
+//                                   "h-12 w-12",
+//                                   "rounded-lg",
+//                                   "flex items-center justify-center",
+//                                 )}
+//                                 style={{
+//                                   backgroundColor: section.bg,
+//                                 }}
+//                               >
+//                                 <Icon size={30} color={section.color} />
+//                               </div>
+
+//                               <p className="text-lg text-[#8a9ab0]">
+//                                 {section.title}
+//                               </p>
+//                             </div>
+
+//                             <div
+//                               style={{
+//                                 display: "flex",
+//                                 alignItems: "baseline",
+//                                 gap: 2,
+//                               }}
+//                             >
+//                               <span
+//                                 style={{
+//                                   fontSize: 28,
+//                                   fontWeight: 300,
+//                                   color: colors.navy,
+//                                 }}
+//                               >
+//                                 {section.value}
+//                               </span>
+//                               <span
+//                                 style={{
+//                                   fontSize: 14,
+//                                   color: colors.textMuted,
+//                                 }}
+//                               >
+//                                 {section.suffix}
+//                               </span>
+//                             </div>
+//                           </CardContent> */}
+//                         </Card>
+//                       </motion.a>
+//                     );
+//                   })}
+//                 </div>
+//               </div>
+//             </div>
+//           </motion.section>
+//         );
+//       })}
+//     </div>
+//   );
+// }
+
 function ContentSections({ stats }: StatProps) {
+  const detailSections = stats.filter(
+    (section) =>
+      section.details &&
+      section.details.length > 0 &&
+      section.value !== "null"
+  );
+
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-      {/* {sections.map(({ id, title, icon, color, bg }, i) => { */}
-      {stats.map((section, i) => {
+      {detailSections.map((section, i) => {
         const Icon = section.icon;
-
-        if (
-          section.id === "final" ||
-          section.id === "midterm" ||
-          section.id === "project" ||
-          section.id === "attendance" ||
-          section.id === "lab" ||
-          section.value === "null"
-        ) {
-          return null;
-        }
 
         return (
           <motion.section
@@ -456,6 +683,7 @@ function ContentSections({ stats }: StatProps) {
                 >
                   <Icon size={18} />
                 </div>
+
                 <h3
                   style={{
                     fontSize: 18,
@@ -465,161 +693,76 @@ function ContentSections({ stats }: StatProps) {
                 >
                   {section.title}
                 </h3>
-                {/* <Tag style={{ marginLeft: "auto", ...tagStyle }}>{tag}</Tag> */}
               </div>
-              <div style={{ padding: "20px 24px" }}>
-                {/* <div
-                  style={{
-                    background: "#faf8f4",
-                    borderRadius: 10,
-                    border: `1px dashed rgba(13,27,42,0.12)`,
-                    height: 120,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    color: colors.textMuted,
-                    fontSize: 13,
-                  }}
-                >
-                  {section.title} content goes here
-                </div> */}
 
+              <div style={{ padding: "20px 24px" }}>
                 <div
                   className="
-                grid
-                grid-cols-1
-                sm:grid-cols-2
-                lg:grid-cols-3
-                xl:grid-cols-4
-                gap-6
-              "
+                    grid
+                    grid-cols-1
+                    sm:grid-cols-2
+                    lg:grid-cols-3
+                    xl:grid-cols-4
+                    gap-6
+                  "
                 >
-                  {section.details?.map((elem, index) => {
-                    return (
-                      <motion.a
-                        key={index}
-                        // href={`#${elem.id}`}
-                        initial={{ opacity: 0, y: 15 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: index * 0.05 }}
-                        // whileHover={{ scale: 1.03 }}
-                        whileTap={{ scale: 0.98 }}
+                  {section.details!.map((elem, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, y: 15 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.05 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      <Card
+                        className={cn(
+                          "rounded-2xl",
+                          "bg-[#faf8f4]",
+                          "border border-[rgba(13,27,42,0.1)]",
+                          "transition-all duration-300",
+                          "h-full",
+                        )}
                       >
-                        <Card
+                        <CardContent
                           className={cn(
-                            "rounded-2xl",
-                            "bg-[#faf8f4]",
-                            "border border-[rgba(13,27,42,0.1)]",
-                            "transition-all duration-300",
-                            "h-full",
+                            "flex flex-col",
+                            "items-center",
+                            "justify-center",
+                            "space-y-2",
+                            "text-[#171717]",
                           )}
                         >
-                          <CardContent
-                            className={cn(
-                              "flex flex-col",
-                              "items-center",
-                              "justify-center",
-                              "space-y-2",
-                              "text-[#171717]",
-                            )}
+                          <div
+                            style={{
+                              display: "flex",
+                              alignItems: "baseline",
+                              gap: 2,
+                            }}
                           >
-                            {/* <h3
-                              className="text-3xl "
-                              style={{
-                                ...serif,
-                              }}
+                            <h3
+                              className="text-3xl"
+                              style={serif}
                             >
                               {elem.value === "" ? "-" : elem.value}
-                            </h3> */}
-                            <div
-                              style={{
-                                display: "flex",
-                                alignItems: "baseline",
-                                gap: 2,
-                              }}
-                            >
-                              <h3
-                                className="text-3xl"
-                                style={{
-                                  ...serif,
-                                }}
-                              >
-                                {elem.value === "" ? "-" : elem.value}
-                              </h3>
-
-                              <span
-                                style={{
-                                  fontSize: 14,
-                                  color: colors.textMuted,
-                                }}
-                              >
-                                {elem.suffix}
-                              </span>
-                            </div>
-
-                            <h3 className="text-md  text-center">
-                              {section.title + " " + (index + 1)}
                             </h3>
-                          </CardContent>
-                          {/* <CardContent
-                            className={cn(
-                              "px-6",
-                              "flex",
-                              // " flex-col",
-                              "items-center",
-                              "justify-between",
-                              // "gap-4",
-                            )}
-                          >
-                            <div className="space-y-2">
-                              <div
-                                className={cn(
-                                  "h-12 w-12",
-                                  "rounded-lg",
-                                  "flex items-center justify-center",
-                                )}
-                                style={{
-                                  backgroundColor: section.bg,
-                                }}
-                              >
-                                <Icon size={30} color={section.color} />
-                              </div>
 
-                              <p className="text-lg text-[#8a9ab0]">
-                                {section.title}
-                              </p>
-                            </div>
-
-                            <div
+                            <span
                               style={{
-                                display: "flex",
-                                alignItems: "baseline",
-                                gap: 2,
+                                fontSize: 14,
+                                color: colors.textMuted,
                               }}
                             >
-                              <span
-                                style={{
-                                  fontSize: 28,
-                                  fontWeight: 300,
-                                  color: colors.navy,
-                                }}
-                              >
-                                {section.value}
-                              </span>
-                              <span
-                                style={{
-                                  fontSize: 14,
-                                  color: colors.textMuted,
-                                }}
-                              >
-                                {section.suffix}
-                              </span>
-                            </div>
-                          </CardContent> */}
-                        </Card>
-                      </motion.a>
-                    );
-                  })}
+                              {elem.suffix}
+                            </span>
+                          </div>
+
+                          <h3 className="text-md text-center">
+                            {`${section.title} ${index + 1}`}
+                          </h3>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -835,110 +978,17 @@ const StudentDashboard = ({ student }: Prop) => {
         {/* TOP SECTION */}
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
           {/* STUDENT INFO */}
-          {/* <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="xl:col-span-2"
-            >
-              <Card className="rounded-3xl shadow-md border">
-                <CardContent className="px-4 space-y-2">
-                  <h2 className="text-3xl font-bold">Student Information</h2>
-
-                  <div className="space-y-4">
-                    <div>
-                      <p className="text-muted-foreground">Name</p>
-                      <p className="font-semibold">John Doe</p>
-                    </div>
-
-                    <div>
-                      <p className="text-muted-foreground">Email</p>
-                      <p className="font-semibold">john@gmail.com</p>
-                    </div>
-
-                    <div>
-                      <p className="text-muted-foreground">Course</p>
-                      <p className="font-semibold">CSE220 - Data Structures</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div> */}
           <StudentCard student={student} />
 
           {/* GRADE CARD */}
-          {/* <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-            >
-              <Card className="rounded-3xl shadow-md border h-full">
-                <CardContent
-                  className="
-                    h-full
-                    flex flex-col
-                    justify-center
-                    items-center
-                    p-2
-                  "
-                >
-                  <p className="text-muted-foreground text-lg">Current Grade</p>
-
-                  <h1 className="text-8xl font-black mt-4">A</h1>
-
-                  <p className="mt-4 text-muted-foreground">GPA: 4.00</p>
-                </CardContent>
-              </Card>
-            </motion.div> */}
           <GradeCard student={student} />
         </div>
 
         {/* NAVIGATION CARDS */}
         <Statcard stats={stats} />
         {/* CONTENT SECTIONS */}
-        {/* <div className="space-y-10">
-            {sections.map((section) => {
-              const Icon = section.icon;
-
-              return (
-                <section
-                  key={section.id}
-                  id={section.id}
-                  className="scroll-mt-24"
-                >
-                  <Card className="rounded-3xl border shadow-sm">
-                    <CardContent className="p-8 md:p-10">
-                      <div className="flex items-center gap-4 mb-6">
-                        <Icon className="h-8 w-8" />
-
-                        <h2 className="text-4xl font-bold">{section.title}</h2>
-                      </div>
-
-                      <div className="space-y-4 text-muted-foreground leading-7">
-                        <p>This is the {section.title} section.</p>
-
-                        <div
-                          className="
-                            rounded-2xl
-                            border
-                            p-6
-                            mt-6
-                            bg-muted/40
-                            min-h-[250px]
-                          "
-                        >
-                          Section content goes here.
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </section>
-              );
-            })}
-          </div> */}
         <ContentSections stats={stats} />
       </main>
-      {/* </div> */}
-      {/* </div> */}
     </section>
   );
 };
