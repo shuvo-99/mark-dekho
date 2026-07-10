@@ -8,6 +8,9 @@ export async function getStudentData(email: string) {
     cache: "no-store",
   });
 
+  // console.log('response----->',response.json());
+  
+
   if (!response.ok) {
     throw new Error("Failed to fetch student data");
   }
