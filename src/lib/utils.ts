@@ -366,6 +366,14 @@ export function transformSections(
       bg: "rgba(45,212,160,0.10)",
     },
     {
+      id: "attendanceMarks",
+      title: "Attendance Marks",
+      totalPrefix: "attendanceMark",
+      icon: UserCheck,
+      color: colors.coral,
+      bg: "rgba(255,107,91,0.10)",
+    },
+    {
       id: "project",
       title: "Project",
       totalPrefix: "project",
