@@ -16,6 +16,7 @@ import {
 import {
   Colors,
   DetailItem,
+  RemarkItem,
   SectionItem,
   StudentRawData,
 } from "@/types/student";
@@ -300,7 +301,7 @@ function getFieldByPrefix(data: StudentRawData, prefix: string) {
 
 function getDetails(data: StudentRawData, prefix: string): DetailItem[] {
   return Object.keys(data)
-    .filter((key) => new RegExp(`^${prefix}\\d+_`).test(key))
+    .filter((key) => new RegExp(`^${prefix}\\d+_\\d+$`).test(key))
     .sort((a, b) => {
       const numA = Number(a.match(/\d+/)?.[0] || 0);
       const numB = Number(b.match(/\d+/)?.[0] || 0);
@@ -310,6 +311,17 @@ function getDetails(data: StudentRawData, prefix: string): DetailItem[] {
       value: String(data[key] ?? ""),
       suffix: `/${key.split("_")[1]}`,
     }));
+}
+
+function getRemarks(data: StudentRawData, prefix: string): RemarkItem[] {
+  return Object.keys(data)
+    .filter((key) => new RegExp(`^${prefix}\\d+_remark$`, "i").test(key))
+    .map((key) => ({
+      index: Number(key.match(/\d+/)?.[0] || 0),
+      text: String(data[key] ?? "").trim(),
+    }))
+    .filter((remark) => remark.text.length > 0)
+    .sort((a, b) => a.index - b.index);
 }
 
 export function transformSections(
@@ -424,6 +436,9 @@ export function transformSections(
       value: total.value,
       details: config.detailPrefix
         ? getDetails(data, config.detailPrefix)
+        : undefined,
+      remarks: config.detailPrefix
+        ? getRemarks(data, config.detailPrefix)
         : undefined,
     });
   });

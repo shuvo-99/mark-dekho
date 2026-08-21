@@ -764,6 +764,61 @@ function ContentSections({ stats }: StatProps) {
                     </motion.div>
                   ))}
                 </div>
+                {/* == Remar */}
+                {section.remarks && section.remarks.length > 0 && (
+                  <div
+                    style={{
+                      marginTop: 20,
+                      background: "#faf8f4",
+                      borderRadius: 12,
+                      border: `1px solid ${colors.borderCream}`,
+                      padding: "16px 20px",
+                    }}
+                  >
+                    <div
+                      style={{
+                        fontSize: 11,
+                        color: colors.textMuted,
+                        textTransform: "uppercase",
+                        letterSpacing: "0.6px",
+                        fontWeight: 600,
+                        marginBottom: 10,
+                      }}
+                    >
+                      Remarks
+                    </div>
+                    <ul
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        margin: 0,
+                        paddingLeft: 18,
+                      }}
+                    >
+                      {section.remarks.map((remark, index) => (
+                        <li
+                          key={remark.index}
+                          style={{
+                            fontSize: 14,
+                            color: colors.navy,
+                            lineHeight: 1.5,
+                            padding: "8px 0",
+                            borderBottom:
+                              index < section.remarks!.length - 1
+                                ? `1px solid ${colors.borderCream}`
+                                : "none",
+                          }}
+                        >
+                          <span style={{ fontWeight: 600 }}>
+                            {section.title} {remark.index}
+                          </span>
+                          {" - "}
+                          {remark.text}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </div>
             </div>
           </motion.section>

@@ -50,6 +50,11 @@ export interface DetailItem {
   value: string;
   suffix: string;
 }
+
+export interface RemarkItem {
+  index: number;
+  text: string;
+}
 export interface SectionItem {
   id: string;
   title: string;
@@ -65,6 +70,7 @@ export interface SectionItem {
 
   // details?: (number | string)[];
   details?: DetailItem[];
+  remarks?: RemarkItem[];
 }
 
 // ======================
