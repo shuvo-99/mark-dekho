@@ -5,6 +5,7 @@ import { cn, transformSections } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { LucideIcon } from "lucide-react";
 import AvatarDemo from "./avatar";
+import TrendChart from "./TrendChart";
 import { SectionItem, StudentRawData } from "@/types/student";
 
 type Prop = {
@@ -363,7 +364,13 @@ function ContentSections({ stats }: StatProps) {
                 </h3>
               </div>
 
-              <div style={{ padding: "20px 24px" }}>
+              {/* <div style={{ padding: "20px 24px" }}> */}
+              <div className={cn("px-6 py-5")}>
+                <TrendChart
+                  details={section.details!}
+                  title={section.title}
+                  color={section.color}
+                />
                 <div
                   className="
                     grid
