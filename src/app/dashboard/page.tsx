@@ -1,16 +1,12 @@
 import Footer from "@/components/footer";
 import StudentDashboard from "@/components/studentDashboard";
 import { getStudentData } from "@/lib/getStudentData";
-import { auth, signIn, signOut } from "@/auth";
+import { auth } from "@/auth";
 import UnAuthorized from "@/components/unAuthorized";
 import Navbar from "@/components/Navbar";
 import { redirect } from "next/navigation";
 
-type Prop = {
-  email: string;
-};
-
-export default async function DashboardPage({ email }: Prop) {
+export default async function DashboardPage() {
   const session = await auth();
 
   if (!session) return <UnAuthorized />;

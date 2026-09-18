@@ -35,7 +35,13 @@ const colors = {
   borderCream: "rgba(13,27,42,0.1)",
 };
 
-function Tag({ children, style }: any) {
+function Tag({
+  children,
+  style,
+}: {
+  children: React.ReactNode;
+  style?: React.CSSProperties;
+}) {
   return (
     <span
       style={{
