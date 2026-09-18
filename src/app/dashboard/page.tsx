@@ -21,9 +21,6 @@ export default async function DashboardPage({ email }: Prop) {
   if (!student?.email) {
     redirect("/invalid-email");
   }
-  // console.log("std - ", student);
-  // console.log("newData - ", newData);
-
   return (
     <main className="min-h-screen bg-[#faf8f4]">
       <Navbar />
