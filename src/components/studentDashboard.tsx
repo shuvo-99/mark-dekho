@@ -6,6 +6,8 @@ import { motion } from "framer-motion";
 import { LucideIcon } from "lucide-react";
 import AvatarDemo from "./avatar";
 import TrendChart from "./TrendChart";
+import StatProgress from "./StatProgress";
+import BarredBanner from "./BarredBanner";
 import { SectionItem, StudentRawData } from "@/types/student";
 
 type Prop = {
@@ -555,82 +557,54 @@ function Statcard({ stats }: StatProps) {
                   "bg-white",
                 )}
               >
-                {/* <CardContent
-                        className="
-                          p-2
-                          flex flex-col
-                          items-center
-                          justify-center
-                          gap-4
-                          
-                        "
+                <CardContent className={cn("px-6 flex flex-col gap-3")}>
+                  <div className="flex items-center justify-between">
+                    <div className="space-y-2">
+                      <div
+                        className={cn(
+                          "h-8 w-8",
+                          "rounded-lg",
+                          "flex items-center justify-center",
+                        )}
+                        style={{
+                          backgroundColor: section.bg,
+                        }}
                       >
-                        <div
-                          className={cn(
-                            "h-12 w-12",
-                            "rounded-lg",
-                            "flex items-center justify-center",
-                          )}
-                          style={{
-                            backgroundColor: section.bg,
-                          }}
-                        >
-                          <Icon size={30} color={section.color} />
-                        </div>
+                        <Icon size={20} color={section.color} />
+                      </div>
 
-                        <h3
-                          className="text-lg  text-center"
-                        >
-                          {section.title}
-                        </h3>
-                      </CardContent> */}
-                <CardContent
-                  className={cn(
-                    "px-6",
-                    "flex",
-                    // " flex-col",
-                    "items-center",
-                    "justify-between",
-                    // "gap-4",
-                  )}
-                >
-                  <div className="space-y-2">
-                    <div
-                      className={cn(
-                        "h-8 w-8",
-                        "rounded-lg",
-                        "flex items-center justify-center",
-                      )}
-                      style={{
-                        backgroundColor: section.bg,
-                      }}
-                    >
-                      <Icon size={20} color={section.color} />
+                      <p className="text-md text-[#8a9ab0]">{section.title}</p>
                     </div>
 
-                    <p className="text-md text-[#8a9ab0]">{section.title}</p>
-                  </div>
-
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "baseline",
-                      gap: 2,
-                    }}
-                  >
-                    <span
+                    <div
                       style={{
-                        fontSize: 28,
-                        fontWeight: 300,
-                        color: colors.navy,
+                        display: "flex",
+                        alignItems: "baseline",
+                        gap: 2,
                       }}
                     >
-                      {section.value === "" ? "-" : section.value}
-                    </span>
-                    <span style={{ fontSize: 14, color: colors.textMuted }}>
-                      {section.suffix}
-                    </span>
+                      <span
+                        style={{
+                          fontSize: 28,
+                          fontWeight: 300,
+                          color: colors.navy,
+                        }}
+                      >
+                        {section.value === "" ? "-" : section.value}
+                      </span>
+                      <span style={{ fontSize: 14, color: colors.textMuted }}>
+                        {section.suffix}
+                      </span>
+                    </div>
                   </div>
+
+                  <StatProgress
+                    value={section.value}
+                    suffix={section.suffix}
+                    color={section.color}
+                    risk={section.id === "attendance"}
+                    threshold={section.barThreshold}
+                  />
                 </CardContent>
               </Card>
             </motion.a>
@@ -643,6 +617,11 @@ function Statcard({ stats }: StatProps) {
 
 const StudentDashboard = ({ student }: Prop) => {
   const stats = transformSections(student, colors);
+  const attendance = stats.find((section) => section.id === "attendance");
+  const isBarred =
+    attendance?.barThreshold !== undefined &&
+    attendance.value.trim() !== "" &&
+    Number(attendance.value) < attendance.barThreshold;
 
   return (
     // <div className="min-h-screen scroll-smooth ">
@@ -713,6 +692,13 @@ const StudentDashboard = ({ student }: Prop) => {
           {/* GRADE CARD */}
           <GradeCard student={student} />
         </div>
+
+        {isBarred && attendance && (
+          <BarredBanner
+            value={attendance.value}
+            threshold={attendance.barThreshold!}
+          />
+        )}
 
         {/* NAVIGATION CARDS */}
         <Statcard stats={stats} />

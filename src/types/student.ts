@@ -71,6 +71,9 @@ export interface SectionItem {
   // details?: (number | string)[];
   details?: DetailItem[];
   remarks?: RemarkItem[];
+
+  // minimum attendance % required to not be barred (from an "attendance_N" column)
+  barThreshold?: number;
 }
 
 // ======================

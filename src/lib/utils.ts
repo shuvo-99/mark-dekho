@@ -23,6 +23,21 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+function getAttendanceField(data: StudentRawData) {
+  // matches "attendance" or "attendance_90" (a required-% threshold), but not
+  // "attendanceMark"/"attendanceMark_5", which is a separate column
+  const key = Object.keys(data).find((k) => /^attendance(_\d+)?$/i.test(k));
+
+  if (!key) return null;
+
+  const thresholdMatch = key.match(/_(\d+)$/);
+
+  return {
+    value: String(data[key] ?? ""),
+    barThreshold: thresholdMatch ? Number(thresholdMatch[1]) : undefined,
+  };
+}
+
 function getFieldByPrefix(data: StudentRawData, prefix: string) {
   const key = Object.keys(data).find((k) => k.startsWith(prefix));
 
@@ -66,6 +81,8 @@ export function transformSections(
   const sections: SectionItem[] = [];
 
   // Attendance (always shown)
+  const attendance = getAttendanceField(data);
+
   sections.push({
     id: "attendance",
     title: "Attendance",
@@ -73,7 +90,8 @@ export function transformSections(
     color: colors.coral,
     bg: "rgba(255,107,91,0.10)",
     suffix: "%",
-    value: String(data.attendance ?? ""),
+    value: attendance?.value ?? "",
+    barThreshold: attendance?.barThreshold,
   });
 
   const configs = [
