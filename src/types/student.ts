@@ -10,6 +10,8 @@ export interface StudentRawData {
   name: string;
   student_id: string;
 
+  role?: "student" | "faculty";
+
   attendance?: number | string;
 
   // quiz1?: number | string;
@@ -74,6 +76,35 @@ export interface SectionItem {
 
   // minimum attendance % required to not be barred (from an "attendance_N" column)
   barThreshold?: number;
+}
+
+// ======================
+// CLASS STATS TYPE (instructor view)
+// ======================
+
+export interface ComponentStat {
+  id: string;
+  title: string;
+  icon: LucideIcon;
+  color: string;
+  bg: string;
+  suffix: string;
+  average: number | null;
+  count: number;
+}
+
+export interface HistogramBucket {
+  label: string;
+  count: number;
+  percent: number;
+}
+
+export interface FlaggedStudent {
+  email: string;
+  name: string;
+  student_id: string;
+  value: string;
+  barThreshold: number;
 }
 
 // ======================

@@ -1,5 +1,6 @@
 import Footer from "@/components/footer";
 import StudentDashboard from "@/components/studentDashboard";
+import InstructorDashboard from "@/components/InstructorDashboard";
 import { getStudentData } from "@/lib/getStudentData";
 import { auth } from "@/auth";
 import UnAuthorized from "@/components/unAuthorized";
@@ -13,10 +14,23 @@ export default async function DashboardPage() {
 
   const user = session?.user;
   const student = await getStudentData(user?.email ?? "");
+  console.log('std ---', student);
+  
 
   if (!student?.email) {
     redirect("/invalid-email");
   }
+
+  if (student.role === "faculty") {
+    return (
+      <main className="min-h-screen bg-[#faf8f4]">
+        <Navbar />
+        <InstructorDashboard roster={student.roster ?? []} />
+        <Footer />
+      </main>
+    );
+  }
+
   return (
     <main className="min-h-screen bg-[#faf8f4]">
       <Navbar />
