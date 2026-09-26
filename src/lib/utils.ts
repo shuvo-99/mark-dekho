@@ -5,10 +5,8 @@ import {
   BookOpen,
   ClipboardList,
   FileText,
-  Bell,
   FolderKanban,
   GraduationCap,
-  MessageSquare,
   PenBox,
   UserCheck,
   LaptopMinimal,
@@ -25,268 +23,20 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-// export function transformSections(
-//   data: StudentRawData,
-//   colors: Colors,
-// ): SectionItem[] {
-//   const quizzes = Object.keys(data)
-//     .filter((key) => key.startsWith("quiz"))
-//     .sort((a, b) => {
-//       const numA = Number(a.replace("quiz", ""));
-//       const numB = Number(b.replace("quiz", ""));
-//       return numA - numB;
-//     })
-//     .map((key) => String(data[key]));
+function getAttendanceField(data: StudentRawData) {
+  // matches "attendance" or "attendance_90" (a required-% threshold), but not
+  // "attendanceMark"/"attendanceMark_5", which is a separate column
+  const key = Object.keys(data).find((k) => /^attendance(_\d+)?$/i.test(k));
 
-//   const assignments = Object.keys(data)
-//     .filter((key) => key.startsWith("assignment"))
-//     .sort((a, b) => {
-//       const numA = Number(a.replace("assignment", ""));
-//       const numB = Number(b.replace("assignment", ""));
-//       return numA - numB;
-//     })
-//     .map((key) => String(data[key]));
+  if (!key) return null;
 
-//   const evaluations: any[] = Object.keys(data)
-//     .filter((key) => key.startsWith("eval"))
-//     .sort((a, b) => {
-//       const numA = Number(a.replace("eval", ""));
-//       const numB = Number(b.replace("eval", ""));
-//       return numA - numB;
-//     })
-//     .map((key) => String(data[key]));
+  const thresholdMatch = key.match(/_(\d+)$/);
 
-//   return [
-//     {
-//       id: "attendance",
-//       title: "Attendance",
-//       icon: UserCheck,
-//       color: colors.coral,
-//       bg: "rgba(255,107,91,0.10)",
-//       suffix: "%",
-//       value: String(data.attendance || ""),
-//     },
-//     {
-//       id: "assignment",
-//       title: "Assignment",
-//       icon: ClipboardList,
-//       color: colors.amber,
-//       bg: "rgba(245,166,35,0.10)",
-//       suffix: "/5",
-//       value: String(data.totalAssignment || ""),
-//       details: assignments,
-//     },
-//     {
-//       id: "quiz",
-//       title: "Quiz",
-//       icon: PenBox,
-//       color: colors.purple,
-//       bg: "rgba(123,135,245,0.10)",
-//       suffix: "/15",
-//       value: String(data.totalQuiz || ""),
-//       details: quizzes,
-//     },
-//     {
-//       id: "midterm",
-//       title: "Midterm",
-//       icon: FileText,
-//       color: colors.green,
-//       bg: "rgba(45,212,160,0.10)",
-//       suffix: "/25",
-//       value: String(data.mid || ""),
-//     },
-//     {
-//       id: "project",
-//       title: "Project",
-//       icon: FolderKanban,
-//       color: colors.coral,
-//       bg: "rgba(255,107,91,0.10)",
-//       suffix: "/20",
-//       value: String(data.project || ""),
-//     },
-//     {
-//       id: "evaluation",
-//       title: "Evaluation",
-//       icon: BookOpen,
-//       color: colors.amber,
-//       bg: "rgba(245,166,35,0.10)",
-//       suffix: "%",
-//       value: String(data.totalEval || ""),
-//       details: evaluations,
-//     },
-//     {
-//       id: "lab",
-//       title: "Lab",
-//       icon: LaptopMinimal,
-//       color: colors.purple,
-//       bg: "rgba(123,135,245,0.10)",
-//       suffix: "/10",
-//       value: String(data.lab || ""),
-//     },
-//     {
-//       id: "final",
-//       title: "Final",
-//       icon: GraduationCap,
-//       color: colors.green,
-//       bg: "rgba(45,212,160,0.10)",
-//       suffix: "/35",
-//       value: String(data.final || ""),
-//     },
-//   ];
-// }
-
-// type DetailItem = {
-//   value: string;
-//   suffix: string;
-// };
-
-// ========================================================
-
-// function getFieldByPrefix(data: StudentRawData, prefix: string) {
-//   const key = Object.keys(data).find((k) => k.startsWith(prefix));
-
-//   if (!key) {
-//     return {
-//       value: "",
-//       suffix: "",
-//     };
-//   }
-
-//   const suffix = key.includes("_") ? `/${key.split("_")[1]}` : "";
-
-//   return {
-//     value: String(data[key] ?? ""),
-//     suffix,
-//   };
-// }
-
-// function getDetails(data: StudentRawData, prefix: string): DetailItem[] {
-//   return Object.keys(data)
-//     .filter((key) => new RegExp(`^${prefix}\\d+_`).test(key))
-//     .sort((a, b) => {
-//       const numA = Number(a.match(/\d+/)?.[0] || 0);
-//       const numB = Number(b.match(/\d+/)?.[0] || 0);
-//       return numA - numB;
-//     })
-//     .map((key) => ({
-//       value: String(data[key] ?? ""),
-//       suffix: `/${key.split("_")[1]}`,
-//     }));
-// }
-
-
-
-// export function transformSections(
-//   data: StudentRawData,
-//   colors: Colors,
-// ): SectionItem[] {
-//   const quizTotal = getFieldByPrefix(data, "totalQuiz");
-//   const assignmentTotal = getFieldByPrefix(data, "totalAssignment");
-//   const evalTotal = getFieldByPrefix(data, "totalEval");
-//   const mid = getFieldByPrefix(data, "mid");
-//   const project = getFieldByPrefix(data, "project");
-//   const lab = getFieldByPrefix(data, "lab");
-//   const final = getFieldByPrefix(data, "final");
-//   const assessmentTotal = getFieldByPrefix(data, "totalAssessment");
-
-//   const quizzes = getDetails(data, "quiz");
-//   const assignments = getDetails(data, "assignment");
-//   const evaluations = getDetails(data, "eval");
-//   const assessments = getDetails(data, "assessment");
-
-//   return [
-//     {
-//       id: "attendance",
-//       title: "Attendance",
-//       icon: UserCheck,
-//       color: colors.coral,
-//       bg: "rgba(255,107,91,0.10)",
-//       suffix: "%",
-//       value: String(data.attendance || ""),
-//     },
-//     {
-//       id: "assignment",
-//       title: "Assignment",
-//       icon: ClipboardList,
-//       color: colors.amber,
-//       bg: "rgba(245,166,35,0.10)",
-//       suffix: assignmentTotal.suffix,
-//       value: assignmentTotal.value,
-//       details: assignments,
-//     },
-//     {
-//       id: "quiz",
-//       title: "Quiz",
-//       icon: PenBox,
-//       color: colors.purple,
-//       bg: "rgba(123,135,245,0.10)",
-//       suffix: quizTotal.suffix,
-//       value: quizTotal.value,
-//       details: quizzes,
-//     },
-//     {
-//       id: "assessment",
-//       title: "Assessment",
-//       icon: PenBox,
-//       color: colors.purple,
-//       bg: "rgba(123,135,245,0.10)",
-//       suffix: assessmentTotal.suffix,
-//       value: assessmentTotal.value,
-//       details: assessments,
-//     },
-//     {
-//       id: "midterm",
-//       title: "Midterm",
-//       icon: FileText,
-//       color: colors.green,
-//       bg: "rgba(45,212,160,0.10)",
-//       suffix: mid.suffix,
-//       value: mid.value,
-//     },
-//     {
-//       id: "project",
-//       title: "Project",
-//       icon: FolderKanban,
-//       color: colors.coral,
-//       bg: "rgba(255,107,91,0.10)",
-//       suffix: project.suffix,
-//       value: project.value,
-//     },
-//     {
-//       id: "evaluation",
-//       title: "Evaluation",
-//       icon: BookOpen,
-//       color: colors.amber,
-//       bg: "rgba(245,166,35,0.10)",
-//       suffix: evalTotal.suffix,
-//       value: evalTotal.value,
-//       details: evaluations,
-//     },
-//     {
-//       id: "lab",
-//       title: "Lab",
-//       icon: LaptopMinimal,
-//       color: colors.purple,
-//       bg: "rgba(123,135,245,0.10)",
-//       suffix: lab.suffix,
-//       value: lab.value,
-//     },
-//     {
-//       id: "final",
-//       title: "Final",
-//       icon: GraduationCap,
-//       color: colors.green,
-//       bg: "rgba(45,212,160,0.10)",
-//       suffix: final.suffix,
-//       value: final.value,
-//     },
-//   ];
-// }
-
-
-
-// =================================
-
+  return {
+    value: String(data[key] ?? ""),
+    barThreshold: thresholdMatch ? Number(thresholdMatch[1]) : undefined,
+  };
+}
 
 function getFieldByPrefix(data: StudentRawData, prefix: string) {
   const key = Object.keys(data).find((k) => k.startsWith(prefix));
@@ -331,6 +81,8 @@ export function transformSections(
   const sections: SectionItem[] = [];
 
   // Attendance (always shown)
+  const attendance = getAttendanceField(data);
+
   sections.push({
     id: "attendance",
     title: "Attendance",
@@ -338,7 +90,8 @@ export function transformSections(
     color: colors.coral,
     bg: "rgba(255,107,91,0.10)",
     suffix: "%",
-    value: String(data.attendance ?? ""),
+    value: attendance?.value ?? "",
+    barThreshold: attendance?.barThreshold,
   });
 
   const configs = [

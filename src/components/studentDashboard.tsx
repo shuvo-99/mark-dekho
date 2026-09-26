@@ -3,20 +3,11 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { cn, transformSections } from "@/lib/utils";
 import { motion } from "framer-motion";
-import {
-  BookOpen,
-  ClipboardList,
-  FileText,
-  Bell,
-  FolderKanban,
-  GraduationCap,
-  MessageSquare,
-  PenBox,
-  UserCheck,
-  LaptopMinimal,
-  LucideIcon,
-} from "lucide-react";
+import { LucideIcon } from "lucide-react";
 import AvatarDemo from "./avatar";
+import TrendChart from "./TrendChart";
+import StatProgress from "./StatProgress";
+import BarredBanner from "./BarredBanner";
 import { SectionItem, StudentRawData } from "@/types/student";
 
 type Prop = {
@@ -28,7 +19,6 @@ type StatProps = {
 
 // ─── Tiny style helpers ────────────────────────────────────────────────────────
 const serif = { fontFamily: "'DM Serif Display', serif" };
-const sans = { fontFamily: "'DM Sans', sans-serif" };
 
 // ─── Design Tokens ────────────────────────────────────────────────────────────
 const colors = {
@@ -48,100 +38,13 @@ const colors = {
   borderCream: "rgba(13,27,42,0.1)",
 };
 
-const sections = [
-  {
-    id: "attendance",
-    title: "Attendance",
-    icon: UserCheck,
-    color: colors.coral,
-    // bg: "#ff6b5b",
-    bg: "rgba(255,107,91,0.10)",
-    suffix: "%",
-    value: "92",
-  },
-  {
-    id: "assignments",
-    title: "Assignments",
-    icon: ClipboardList,
-    color: colors.amber,
-    // bg: "#f5a623",
-    bg: "rgba(245,166,35,0.10)",
-    suffix: "/5",
-    value: "92",
-  },
-  {
-    id: "quiz",
-    title: "Quiz",
-    icon: PenBox,
-    color: colors.purple,
-    // bg: "#7b87f5",
-    bg: "rgba(123,135,245,0.10)",
-    suffix: "%",
-    value: "92",
-  },
-  {
-    id: "midterm",
-    title: "Midterm",
-    icon: FileText,
-    color: colors.green,
-    // bg: "#2dd4a0",
-    bg: "rgba(45,212,160,0.10)",
-    suffix: "%",
-    value: "92",
-  },
-  {
-    id: "projects",
-    title: "Projects",
-    icon: FolderKanban,
-    color: colors.coral,
-    // bg: "#ff6b5b",
-    bg: "rgba(255,107,91,0.10)",
-    suffix: "%",
-    value: "92",
-  },
-  {
-    id: "evaluation",
-    title: "Evaluation",
-    icon: BookOpen,
-    color: colors.amber,
-    // bg: "#f5a623",
-    bg: "rgba(245,166,35,0.10)",
-    suffix: "%",
-    value: "92",
-  },
-  {
-    id: "lab",
-    title: "Lab",
-    icon: LaptopMinimal,
-    color: colors.purple,
-    // bg: "#7b87f5",
-    bg: "rgba(123,135,245,0.10)",
-    suffix: "%",
-    value: "92",
-  },
-  {
-    id: "final",
-    title: "Final",
-    icon: GraduationCap,
-    color: colors.green,
-    // bg: "#2dd4a0",
-    bg: "rgba(45,212,160,0.10)",
-    suffix: "%",
-    value: "92",
-  },
-  // {
-  //   id: "announcements",
-  //   title: "Announcements",
-  //   icon: Bell,
-  // },
-  // {
-  //   id: "feedback",
-  //   title: "Feedback",
-  //   icon: MessageSquare,
-  // },
-];
-
-function Tag({ children, style }: any) {
+function Tag({
+  children,
+  style,
+}: {
+  children: React.ReactNode;
+  style?: React.CSSProperties;
+}) {
   return (
     <span
       style={{
@@ -398,238 +301,6 @@ function GradeCard({ student }: Prop) {
   );
 }
 
-// function ContentSections({ stats }: StatProps) {
-//   return (
-//     <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-//       {/* {sections.map(({ id, title, icon, color, bg }, i) => { */}
-//       {stats.map((section, i) => {
-//         const Icon = section.icon;
-
-//         if (
-//           section.id === "final" ||
-//           section.id === "midterm" ||
-//           section.id === "project" ||
-//           section.id === "attendance" ||
-//           section.id === "lab" ||
-//           section.value === "null"
-//         ) {
-//           return null;
-//         }
-
-//         return (
-//           <motion.section
-//             key={section.id}
-//             id={section.id}
-//             initial={{ opacity: 0, y: 20 }}
-//             animate={{ opacity: 1, y: 0 }}
-//             transition={{ delay: 0.1 + i * 0.08 }}
-//             style={{ scrollMarginTop: 96 }}
-//           >
-//             <div
-//               style={{
-//                 background: "#fff",
-//                 borderRadius: 16,
-//                 border: `1px solid ${colors.borderCream}`,
-//                 overflow: "hidden",
-//               }}
-//             >
-//               <div
-//                 style={{
-//                   padding: "20px 24px",
-//                   display: "flex",
-//                   alignItems: "center",
-//                   gap: 14,
-//                   borderBottom: `1px solid ${colors.borderCream}`,
-//                 }}
-//               >
-//                 <div
-//                   style={{
-//                     width: 36,
-//                     height: 36,
-//                     borderRadius: 10,
-//                     background: section.bg,
-//                     display: "flex",
-//                     alignItems: "center",
-//                     justifyContent: "center",
-//                     color: section.color,
-//                   }}
-//                 >
-//                   <Icon size={18} />
-//                 </div>
-//                 <h3
-//                   style={{
-//                     fontSize: 18,
-//                     color: colors.navy,
-//                     letterSpacing: "-0.2px",
-//                   }}
-//                 >
-//                   {section.title}
-//                 </h3>
-//                 {/* <Tag style={{ marginLeft: "auto", ...tagStyle }}>{tag}</Tag> */}
-//               </div>
-//               <div style={{ padding: "20px 24px" }}>
-//                 {/* <div
-//                   style={{
-//                     background: "#faf8f4",
-//                     borderRadius: 10,
-//                     border: `1px dashed rgba(13,27,42,0.12)`,
-//                     height: 120,
-//                     display: "flex",
-//                     alignItems: "center",
-//                     justifyContent: "center",
-//                     color: colors.textMuted,
-//                     fontSize: 13,
-//                   }}
-//                 >
-//                   {section.title} content goes here
-//                 </div> */}
-
-//                 <div
-//                   className="
-//                 grid
-//                 grid-cols-1
-//                 sm:grid-cols-2
-//                 lg:grid-cols-3
-//                 xl:grid-cols-4
-//                 gap-6
-//               "
-//                 >
-//                   {section.details?.map((elem, index) => {
-//                     return (
-//                       <motion.a
-//                         key={index}
-//                         // href={`#${elem.id}`}
-//                         initial={{ opacity: 0, y: 15 }}
-//                         animate={{ opacity: 1, y: 0 }}
-//                         transition={{ delay: index * 0.05 }}
-//                         // whileHover={{ scale: 1.03 }}
-//                         whileTap={{ scale: 0.98 }}
-//                       >
-//                         <Card
-//                           className={cn(
-//                             "rounded-2xl",
-//                             "bg-[#faf8f4]",
-//                             "border border-[rgba(13,27,42,0.1)]",
-//                             "transition-all duration-300",
-//                             "h-full",
-//                           )}
-//                         >
-//                           <CardContent
-//                             className={cn(
-//                               "flex flex-col",
-//                               "items-center",
-//                               "justify-center",
-//                               "space-y-2",
-//                               "text-[#171717]",
-//                             )}
-//                           >
-//                             {/* <h3
-//                               className="text-3xl "
-//                               style={{
-//                                 ...serif,
-//                               }}
-//                             >
-//                               {elem.value === "" ? "-" : elem.value}
-//                             </h3> */}
-//                             <div
-//                               style={{
-//                                 display: "flex",
-//                                 alignItems: "baseline",
-//                                 gap: 2,
-//                               }}
-//                             >
-//                               <h3
-//                                 className="text-3xl"
-//                                 style={{
-//                                   ...serif,
-//                                 }}
-//                               >
-//                                 {elem.value === "" ? "-" : elem.value}
-//                               </h3>
-
-//                               <span
-//                                 style={{
-//                                   fontSize: 14,
-//                                   color: colors.textMuted,
-//                                 }}
-//                               >
-//                                 {elem.suffix}
-//                               </span>
-//                             </div>
-
-//                             <h3 className="text-md  text-center">
-//                               {section.title + " " + (index + 1)}
-//                             </h3>
-//                           </CardContent>
-//                           {/* <CardContent
-//                             className={cn(
-//                               "px-6",
-//                               "flex",
-//                               // " flex-col",
-//                               "items-center",
-//                               "justify-between",
-//                               // "gap-4",
-//                             )}
-//                           >
-//                             <div className="space-y-2">
-//                               <div
-//                                 className={cn(
-//                                   "h-12 w-12",
-//                                   "rounded-lg",
-//                                   "flex items-center justify-center",
-//                                 )}
-//                                 style={{
-//                                   backgroundColor: section.bg,
-//                                 }}
-//                               >
-//                                 <Icon size={30} color={section.color} />
-//                               </div>
-
-//                               <p className="text-lg text-[#8a9ab0]">
-//                                 {section.title}
-//                               </p>
-//                             </div>
-
-//                             <div
-//                               style={{
-//                                 display: "flex",
-//                                 alignItems: "baseline",
-//                                 gap: 2,
-//                               }}
-//                             >
-//                               <span
-//                                 style={{
-//                                   fontSize: 28,
-//                                   fontWeight: 300,
-//                                   color: colors.navy,
-//                                 }}
-//                               >
-//                                 {section.value}
-//                               </span>
-//                               <span
-//                                 style={{
-//                                   fontSize: 14,
-//                                   color: colors.textMuted,
-//                                 }}
-//                               >
-//                                 {section.suffix}
-//                               </span>
-//                             </div>
-//                           </CardContent> */}
-//                         </Card>
-//                       </motion.a>
-//                     );
-//                   })}
-//                 </div>
-//               </div>
-//             </div>
-//           </motion.section>
-//         );
-//       })}
-//     </div>
-//   );
-// }
-
 function ContentSections({ stats }: StatProps) {
   const detailSections = stats.filter(
     (section) =>
@@ -695,7 +366,13 @@ function ContentSections({ stats }: StatProps) {
                 </h3>
               </div>
 
-              <div style={{ padding: "20px 24px" }}>
+              {/* <div style={{ padding: "20px 24px" }}> */}
+              <div className={cn("px-6 py-5")}>
+                <TrendChart
+                  details={section.details!}
+                  title={section.title}
+                  color={section.color}
+                />
                 <div
                   className="
                     grid
@@ -880,82 +557,54 @@ function Statcard({ stats }: StatProps) {
                   "bg-white",
                 )}
               >
-                {/* <CardContent
-                        className="
-                          p-2
-                          flex flex-col
-                          items-center
-                          justify-center
-                          gap-4
-                          
-                        "
+                <CardContent className={cn("px-6 flex flex-col gap-3")}>
+                  <div className="flex items-center justify-between">
+                    <div className="space-y-2">
+                      <div
+                        className={cn(
+                          "h-8 w-8",
+                          "rounded-lg",
+                          "flex items-center justify-center",
+                        )}
+                        style={{
+                          backgroundColor: section.bg,
+                        }}
                       >
-                        <div
-                          className={cn(
-                            "h-12 w-12",
-                            "rounded-lg",
-                            "flex items-center justify-center",
-                          )}
-                          style={{
-                            backgroundColor: section.bg,
-                          }}
-                        >
-                          <Icon size={30} color={section.color} />
-                        </div>
+                        <Icon size={20} color={section.color} />
+                      </div>
 
-                        <h3
-                          className="text-lg  text-center"
-                        >
-                          {section.title}
-                        </h3>
-                      </CardContent> */}
-                <CardContent
-                  className={cn(
-                    "px-6",
-                    "flex",
-                    // " flex-col",
-                    "items-center",
-                    "justify-between",
-                    // "gap-4",
-                  )}
-                >
-                  <div className="space-y-2">
-                    <div
-                      className={cn(
-                        "h-8 w-8",
-                        "rounded-lg",
-                        "flex items-center justify-center",
-                      )}
-                      style={{
-                        backgroundColor: section.bg,
-                      }}
-                    >
-                      <Icon size={20} color={section.color} />
+                      <p className="text-md text-[#8a9ab0]">{section.title}</p>
                     </div>
 
-                    <p className="text-md text-[#8a9ab0]">{section.title}</p>
-                  </div>
-
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "baseline",
-                      gap: 2,
-                    }}
-                  >
-                    <span
+                    <div
                       style={{
-                        fontSize: 28,
-                        fontWeight: 300,
-                        color: colors.navy,
+                        display: "flex",
+                        alignItems: "baseline",
+                        gap: 2,
                       }}
                     >
-                      {section.value === "" ? "-" : section.value}
-                    </span>
-                    <span style={{ fontSize: 14, color: colors.textMuted }}>
-                      {section.suffix}
-                    </span>
+                      <span
+                        style={{
+                          fontSize: 28,
+                          fontWeight: 300,
+                          color: colors.navy,
+                        }}
+                      >
+                        {section.value === "" ? "-" : section.value}
+                      </span>
+                      <span style={{ fontSize: 14, color: colors.textMuted }}>
+                        {section.suffix}
+                      </span>
+                    </div>
                   </div>
+
+                  <StatProgress
+                    value={section.value}
+                    suffix={section.suffix}
+                    color={section.color}
+                    risk={section.id === "attendance"}
+                    threshold={section.barThreshold}
+                  />
                 </CardContent>
               </Card>
             </motion.a>
@@ -968,6 +617,11 @@ function Statcard({ stats }: StatProps) {
 
 const StudentDashboard = ({ student }: Prop) => {
   const stats = transformSections(student, colors);
+  const attendance = stats.find((section) => section.id === "attendance");
+  const isBarred =
+    attendance?.barThreshold !== undefined &&
+    attendance.value.trim() !== "" &&
+    Number(attendance.value) < attendance.barThreshold;
 
   return (
     // <div className="min-h-screen scroll-smooth ">
@@ -1038,6 +692,13 @@ const StudentDashboard = ({ student }: Prop) => {
           {/* GRADE CARD */}
           <GradeCard student={student} />
         </div>
+
+        {isBarred && attendance && (
+          <BarredBanner
+            value={attendance.value}
+            threshold={attendance.barThreshold!}
+          />
+        )}
 
         {/* NAVIGATION CARDS */}
         <Statcard stats={stats} />

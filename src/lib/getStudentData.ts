@@ -1,4 +1,12 @@
-export async function getStudentData(email: string) {
+import { StudentRawData } from "@/types/student";
+
+type GetStudentDataResponse = StudentRawData & {
+  roster?: StudentRawData[];
+};
+
+export async function getStudentData(
+  email: string,
+): Promise<GetStudentDataResponse> {
   const response = await fetch(process.env.GOOGLE_SCRIPT_URL!, {
     method: "POST",
     headers: {
@@ -7,9 +15,6 @@ export async function getStudentData(email: string) {
     body: JSON.stringify({ email }),
     cache: "no-store",
   });
-
-  // console.log('response----->',response.json());
-  
 
   if (!response.ok) {
     throw new Error("Failed to fetch student data");
