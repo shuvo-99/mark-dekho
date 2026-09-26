@@ -36,7 +36,6 @@ function onlyStudents(roster: StudentRawData[]) {
 }
 
 export default function InstructorDashboard({ roster }: Props) {
-  console.log('roster ---', roster);
   
   const [selectedEmail, setSelectedEmail] = useState("");
 

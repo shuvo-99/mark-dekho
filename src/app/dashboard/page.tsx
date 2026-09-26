@@ -14,7 +14,6 @@ export default async function DashboardPage() {
 
   const user = session?.user;
   const student = await getStudentData(user?.email ?? "");
-  console.log('std ---', student);
   
 
   if (!student?.email) {
