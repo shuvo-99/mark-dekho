@@ -16,7 +16,6 @@ import { GoogleSignInButton } from "@/components/GoogleSignInButton";
 export default async function SignIn() {
   const session = await auth();
   const user = session?.user;
-  console.log("user --", typeof user);
 
   return (
     // user ? (
